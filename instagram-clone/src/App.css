@@ -6,7 +6,8 @@
   background-color:  white;
   border-bottom: 1px solid lightgrey;
   object-fit: contain;
-
+  display: flex;
+  justify-content: space-between;
 }
 .app {
   background-color: #fafafa;
@@ -17,5 +18,8 @@
   flex-direction: column;
 }
 .app_headerImage {
-  width: 10%;
+  object-fit: contain;
+}
+.app_posts {
+  padding: 20px;;
 }

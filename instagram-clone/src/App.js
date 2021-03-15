@@ -6,6 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from "@material-ui/core";
 import { center } from "@material-ui/core";
+import ImageUpload from "./ImageUpload";
+import InstagramEmbed from 'react-instagram-embed';
+// import React-Dom 
+
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -100,7 +104,10 @@ function App() {
     []);
 
   return (
-    <div className="App">
+    <div className="App"> 
+
+
+    {/* <modal   starts */}
       <Modal  
       open = { open}
       onClose = {() => setOpen(false)}
@@ -147,12 +154,6 @@ function App() {
               alt = "https://www.transparentpng.com/thumb/flight-attendant/flight-attendant-user-icons-png-6.png"
               />
             </center>
-              {/* <Input  
-              placeholder = "UserName"
-              type = "text"
-              value = {username}
-              onChange = { (e) => setUsername(e.target.value)  }
-              /> */}
               <Input  
               placeholder = "Email"
               type = "email"
@@ -169,10 +170,13 @@ function App() {
         </form>  
       </div>
       </Modal>
-      <div className = "app_header" >
-        <img className = "app_headerImage h-10 w-10" src="https://img.icons8.com/metro/26/000000/instagram-new.png" alt="logo Instagram free transparent @transparentpng.com"></img>
-      </div>
-      {  user ? (
+      {/* modal ends */}
+
+
+
+      <div  className = "app_header" >
+        <img className = "app_headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"></img>
+        {  user ? (
         <Button onClick = { () => 
           auth.signOut()
         }  >
@@ -193,15 +197,50 @@ function App() {
             Sign In
           </Button>
         </div>
-      )
-      
-      
+      ) 
       }
+      </div>
+    <div className = "flex">
+      <div className = "app_posts">
+        {
+          posts.map( post => (
+              <Post imageUrl = { post.imageUrl}  UserName = {post.username}  caption = {post.caption}  />
+          ))
+        }
+      </div>
+      {/* <InstagramEmbed
+        url='https://instagr.am/p/Zw9o4/'
+        // clientAccessToken='123|456'
+        maxWidth={320}
+        hideCaption={false}
+        containerTagName='div'
+        protocol=''
+        injectScript
+        onLoading={() => {}}
+        onSuccess={() => {}}
+        onAfterRender={() => {}}
+        onFailure={() => {}}
+      /> */}
+      <InstagramEmbed
+          url='https://instagr.am/p/Zw9o4/'
+          clientAccessToken='542424113811623|45f299b71e0f9c3a68ffe69d5b01e51c'
+          maxWidth={320}
+          hideCaption={false}
+          containerTagName='div'
+          protocol=''
+          injectScript
+          onLoading={() => {}}
+          onSuccess={() => {}}
+          onAfterRender={() => {}}
+          onFailure={() => {}}
+      />
+    </div>
+
 
       {
-        posts.map( post => (
-            <Post imageUrl = { post.imageUrl}  UserName = {post.username}  caption = {post.caption}  />
-        ))
+      user?.displayName?(
+        <ImageUpload  username ={ user.displayName}/>
+      ):<p></p>
       }
     </div>
   );
